@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from "@/components/Logo";
 import {DarkModeToggle} from "@/components/DarkModeToggle";
+import UserButton from "@/components/UserButton";
 
 const Header = ({}) => {
   return (
@@ -9,6 +10,7 @@ const Header = ({}) => {
         <Logo />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <DarkModeToggle />
+          <UserButton />
         </div>
       </nav>
     </header>
