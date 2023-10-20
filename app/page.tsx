@@ -36,7 +36,7 @@ export default function Home() {
                   Get Started
                 </Link>
                 <Link className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300" href={'/pricing'}>
-                  View Pricing <span aria-label={"true"}>-</span>
+                  View Pricing <span aria-label={"true"}>→</span>
                 </Link>
               </div>
             </div>
