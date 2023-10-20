@@ -12,7 +12,7 @@ import {
 import UserAvatar from "@/components/UserAvatar";
 import {Session} from "next-auth";
 import {Button} from "@/components/ui/button";
-import { signIn } from 'next-auth/react';
+import {signIn, signOut} from 'next-auth/react';
 
 const UserButton = ({session}: { session: Session | null}) => {
   if(!session) return (
@@ -21,21 +21,19 @@ const UserButton = ({session}: { session: Session | null}) => {
     </Button>
   )
 
-  return (
+  return session && (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
-          name={'Rokas'}
-          image={'https://yt3.googleusercontent.com/IQ4OqurVrPmACaf3h5fgTcRInn6QoHz0xN4O5qzhuhY7UKgpDg2A4mGyhWW5vcaGSiVbf_FLdQ=s900-c-k-c0x00ffffff-no-rj'}
+          name={session.user?.name || 'Rokas Rudzianskas'}
+          image={session.user?.image || 'https://pbs.twimg.com/profile_images/1350895249678348292/RS1Aa0iK_400x400.jpg'}
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+
+        <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
 
