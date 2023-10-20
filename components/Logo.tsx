@@ -1,10 +1,11 @@
 import React from 'react';
+import Link from "next/link";
 
 const Logo = ({}) => {
   return (
-    <div>
-      
-    </div>
+    <Link href={'/'}>
+      <h1 className="text-lg font-bold text-black">Chat With Anyone</h1>
+    </Link>
   );
 };
 
