@@ -15,6 +15,7 @@ import {Button} from "@/components/ui/button";
 import {signIn, signOut} from 'next-auth/react';
 
 const UserButton = ({session}: { session: Session | null}) => {
+  // Subscription listerner
   if(!session) return (
     <Button variant={'outline'} onClick={() => signIn()} >
       Sign In
@@ -30,7 +31,7 @@ const UserButton = ({session}: { session: Session | null}) => {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
