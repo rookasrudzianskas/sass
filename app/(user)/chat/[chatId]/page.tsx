@@ -7,6 +7,7 @@ import {sortedMessagesRef} from "@/lib/converters/Message";
 import ChatMessages from "@/components/ChatMessages";
 import ChatMembersBadge from "@/components/ChatMembersBadge";
 import AdminControls from "@/components/AdminControls";
+import {chatMembersRef} from "@/lib/converters/ChatMembers";
 
 type Props = {
   params: {
@@ -18,6 +19,8 @@ const ChatPage = async ({params: {chatId}}: Props) => {
   const session = await getServerSession(authOptions);
 
   const initialMessages = (await getDocs(sortedMessagesRef(chatId))).docs.map((doc) => doc.data());
+
+  const hasAccess = (await getDocs(chatMembersRef(chatId))).docs.map((doc) => doc.id).includes(session?.user.id!);
 
   return (
     <>
