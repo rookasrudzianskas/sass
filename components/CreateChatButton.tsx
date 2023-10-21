@@ -46,11 +46,12 @@ const CreateChatButton = ({isLarge}: {isLarge?: boolean}) => {
         duration: 2000,
       });
       router.push(`/chat/${chatId}`);
-    }).catch(() => {
+    }).catch((error) => {
       toast({
         title: 'Error',
         description: 'There was an error creating',
         variant: 'destructive',
+        duration: 2000,
       });
     }).finally(() => {
       setLoading(false);
