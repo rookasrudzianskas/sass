@@ -34,6 +34,8 @@ const ChatInput = ({chatId}: {chatId: string}) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const inputCopy = values.input.trim();
+
     if(values.input.length === 0) {
       return;
     }
