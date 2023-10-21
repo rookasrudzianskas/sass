@@ -27,6 +27,7 @@ import useAdminId from "@/hooks/useAdminId";
 import {PlusCircleIcon} from "lucide-react";
 import {addChatRef, chatMembersRef} from "@/lib/converters/ChatMembers";
 import {getUserByEmailRef} from "@/lib/converters/User";
+import ShareLink from "@/components/ShareLink";
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address")
