@@ -8,6 +8,7 @@ import {useSession} from "next-auth/react";
 import {useSubscriptionStore} from "@/store/store";
 import {useToast} from "@/components/ui/use-toast";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import {v4 as uuidv4} from "uuid";
 
 const CreateChatButton = ({isLarge}: {isLarge?: boolean}) => {
   const router = useRouter();
@@ -17,7 +18,21 @@ const CreateChatButton = ({isLarge}: {isLarge?: boolean}) => {
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const createNewChat = async () => {
-    router.push('/chat/asb');
+    if(!session?.user.id) return;
+
+    setLoading(true);
+    toast({
+      title: 'Creating a new chat...',
+      description: "Creating a new chat",
+      duration: 3000,
+    });
+
+    const chatId = uuidv4();
+
+
+
+
+     router.push('/chat/asb');
   }
 
   if(isLarge) {
