@@ -1,10 +1,12 @@
 import React from 'react';
 import {CheckIcon} from "lucide-react";
+import Link from "next/link";
+import CheckoutButton from "@/components/CheckoutButton";
 
 const tiers = [
   {
     name: "Starter",
-    id: "starter",
+    id: null,
     href: "#",
     priceMonthly: null,
     description: "Get chatting right away with anyone, anywhere!",
@@ -34,7 +36,7 @@ const tiers = [
   },
 ]
 
-const PricingCards = ({}) => {
+const PricingCards = ({redirect}: {redirect: boolean}) => {
   return (
     <div>
       <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
@@ -79,6 +81,14 @@ const PricingCards = ({}) => {
                   ))}
               </ul>
             </div>
+
+            {redirect ? (
+              <Link href={'/register'} className="mt-8 rounded-md block bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset02 focus-visible:outline-indigo-600 cursor-pointer">
+                Get Started Today
+              </Link>
+            ) : (
+              tier.id && <CheckoutButton />
+            )}
           </div>
         ))}
       </div>
