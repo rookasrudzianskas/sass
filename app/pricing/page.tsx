@@ -15,7 +15,7 @@ const PricingPage = ({}) => {
             whoever you are
           </p>
         </div>
-        <div className=" relative mt-6">
+        <div className=" relative mt-6 -z-10">
           <p className="mx-auto max-w-2xl text-lg leading-8 text-white/60">
             Were 99% sure we have a plan to match 100% of your needs
           </p>
@@ -38,7 +38,7 @@ const PricingPage = ({}) => {
             </svg>
         </div>
       </div>
-    <div className="flow-root bg-white pb-24 sm:pb-32">
+    <div className="flow-root bg-white z-50 pb-24 sm:pb-32">
     <div className="-mt-80">
       <PricingCards redirect={true} />
     </div>
