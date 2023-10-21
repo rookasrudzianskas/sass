@@ -13,8 +13,12 @@ import UserAvatar from "@/components/UserAvatar";
 import {Session} from "next-auth";
 import {Button} from "@/components/ui/button";
 import {signIn, signOut} from 'next-auth/react';
+import {useSubscriptionStore} from "@/store/store";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const UserButton = ({session}: { session: Session | null}) => {
+  const subscription = useSubscriptionStore((state) => state.subscription);
+
   // Subscription listerner
   if(!session) return (
     <Button variant={'outline'} onClick={() => signIn()} >
@@ -33,6 +37,12 @@ const UserButton = ({session}: { session: Session | null}) => {
       <DropdownMenuContent>
         <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
+
+        {subscription == undefined && (
+          <DropdownMenuItem>
+            <LoadingSpinner />
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
