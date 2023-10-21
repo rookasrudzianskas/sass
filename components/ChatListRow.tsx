@@ -7,6 +7,7 @@ import {limitedSortedMessagesRef, Message} from "@/lib/converters/Message";
 import {useRouter} from "next/navigation";
 import UserAvatar from "@/components/UserAvatar";
 import {useSession} from "next-auth/react";
+import {useLanguageStore} from "@/store/store";
 
 const ChatListRow = ({chatId}: {chatId: string}) => {
   const router = useRouter();
@@ -14,6 +15,8 @@ const ChatListRow = ({chatId}: {chatId: string}) => {
   const [messages, loading, error] = useCollectionData<Message>(
     limitedSortedMessagesRef(chatId)
   );
+
+  const language = useLanguageStore((state) => state.language);
 
   function prettyUUID(n = 4) {
     return chatId.substring(0, n);
@@ -30,7 +33,7 @@ const ChatListRow = ({chatId}: {chatId: string}) => {
         </p>
 
         <p className="text-gray-400 line-clamp-1">
-          {message?.translated?.[language || 'en'] || "Get the conversation started"}
+          {message?.translated?.[language] || "Get the conversation started"}
         </p>
       </div>
 
