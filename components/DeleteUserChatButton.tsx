@@ -58,7 +58,15 @@ const DeleteUserChatButton = ({chatId}: {chatId: string}) => {
         duration: 3000
       });
       router.replace('/chat');
-    })
+    }).catch((err) => {
+      console.log('Error', err);
+
+      toast({
+        title: "Error",
+        description: "There was an error deleting your chat",
+        variant: "destructive",
+      });
+    }).finally(() => setOpen(false));
   }
 
   return (
