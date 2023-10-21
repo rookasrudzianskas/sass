@@ -9,6 +9,8 @@ import {useSubscriptionStore} from "@/store/store";
 import {useToast} from "@/components/ui/use-toast";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import {v4 as uuidv4} from "uuid";
+import {setDoc, serverTimestamp} from "@firebase/firestore";
+import {addChatRef} from "@/lib/converters/ChatMembers";
 
 const CreateChatButton = ({isLarge}: {isLarge?: boolean}) => {
   const router = useRouter();
@@ -29,8 +31,14 @@ const CreateChatButton = ({isLarge}: {isLarge?: boolean}) => {
 
     const chatId = uuidv4();
 
-
-
+    await setDoc(addChatRef(chatId, session.user.id), {
+      userId: session.user.id!,
+      email: session.user.email!,
+      timestamp: serverTimestamp(),
+      isAdmin: true,
+      chatId: chatId,
+      image: session.user.image || "",
+    });
 
      router.push('/chat/asb');
   }
