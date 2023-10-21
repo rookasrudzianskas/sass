@@ -161,11 +161,11 @@ const InviteUser = ({chatId}: {chatId: string}) => {
           </DialogContent>
         </Dialog>
 
-        {/*<ShareLink*/}
-        {/*  isOpen={openInviteLink}*/}
-        {/*  setIsOpen={setOpenInviteLink}*/}
-        {/*  chatId={chatId}*/}
-        {/*/>*/}
+        <ShareLink
+          isOpen={openInviteLink}
+          setIsOpen={setOpenInviteLink}
+          chatId={chatId}
+        />
       </>
     )
   );
