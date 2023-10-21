@@ -1,14 +1,24 @@
 "use client";
 
-import React from 'react';
+import React, {useState} from 'react';
 import {useSession} from "next-auth/react";
+import {addDoc, collection} from "@firebase/firestore";
+import {db} from "@/firebase";
 
 const CheckoutButton = ({}) => {
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
   const createCheckoutSession = async () => {
-    if(!session) return;
+    if(!session?.user.id) return;
     // This is where stripe will create checkout session
-  }
+    setLoading(true);
+
+    const docRef = await addDoc(collection(db, 'customers', session.user.id, 'checkout_sessions'), {
+      price: 'price_1099',
+      success_url: window.location.origin,
+      cancel_url: window.location.origin,
+    })
+  };
 
   return (
     <div className="flex flex-col space-y-2">
