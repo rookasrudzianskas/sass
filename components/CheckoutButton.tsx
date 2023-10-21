@@ -1,9 +1,12 @@
 "use client";
 
 import React from 'react';
+import {useSession} from "next-auth/react";
 
 const CheckoutButton = ({}) => {
+  const { data: session } = useSession();
   const createCheckoutSession = async () => {
+    if(!session) return;
     // This is where stripe will create checkout session
   }
 
