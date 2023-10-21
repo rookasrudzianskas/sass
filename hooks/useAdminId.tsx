@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {getDocs} from "@firebase/firestore";
 import {chatMemberAdminRef} from "@/lib/converters/ChatMembers";
 
-const useAdminId = ({}) => {
+const useAdminId = ({chatId}: {chatId: string}) => {
   const [adminId, setAdminId] = useState<string>("");
 
   useEffect(() => {

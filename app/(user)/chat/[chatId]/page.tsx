@@ -22,7 +22,7 @@ const ChatPage = async ({params: {chatId}}: Props) => {
     <>
       {/* Admin controls */}
       {/* Chat members */}
-      <ChatMembersBadge />
+      <ChatMembersBadge chatId={chatId} />
       <div className="flex-1">
         <ChatMessages
           chatId={chatId}

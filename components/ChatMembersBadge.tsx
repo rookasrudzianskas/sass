@@ -3,16 +3,41 @@
 import React from 'react';
 import {ChatMembers, chatMembersRef} from "@/lib/converters/ChatMembers";
 import {useCollectionData} from "react-firebase-hooks/firestore";
+import useAdminId from "@/hooks/useAdminId";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import {Badge} from "@/components/ui/badge";
+import UserAvatar from "@/components/UserAvatar";
 
 const ChatMembersBadge = ({chatId}: {chatId: string}) => {
   const [members, loading, error] = useCollectionData<ChatMembers>(
     chatMembersRef(chatId)
   );
 
-  return (
-    <div>
+  const adminId = useAdminId({chatId});
 
-    </div>
+  if(loading && !members) return <LoadingSpinner />
+
+  return (
+    !loading && (
+      <div className="p-2 border rounded-xl m-5">
+        <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 p-2">
+          {members?.map((member) => (
+            <Badge variant="secondary" key={member.email} className="h-14 o-5 pl-2 pr-5 flex space-x-2">
+              <div className="flex items-center space-x-2">
+                <UserAvatar name={member.email} image={member.image} />
+              </div>
+
+              <div>
+                <p>{member.email}</p>
+                {member.userId === adminId && (
+                  <p className="text-indigo-400 animate-pulse">Admin</p>
+                )}
+              </div>
+            </Badge>
+          ))}
+        </div>
+      </div>
+    )
   );
 };
 
