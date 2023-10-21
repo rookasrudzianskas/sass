@@ -30,7 +30,7 @@ const ChatListRow = ({chatId}: {chatId: string}) => {
         </p>
 
         <p className="text-gray-400 line-clamp-1">
-          {message?.translated?.[language] || "Get the conversation started"}
+          {message?.translated?.[language || 'en'] || "Get the conversation started"}
         </p>
       </div>
 
