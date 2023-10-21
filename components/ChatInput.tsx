@@ -47,9 +47,10 @@ const ChatInput = ({chatId}: {chatId: string}) => {
     const isPro = subscription?.role === 'pro' && subscription.status === 'active';
 
     if(!isPro && messages >= 20) {
+      // @ts-ignore
       toast({
         title: "Free plan limit exceeded",
-        description: 'You have exceeded the plan limit. Upgrade to Pro',
+        description: "You have exceeded the plan limit. Upgrade to Pro",
         variant: "destructive",
         action: (
           <ToastAction
@@ -58,8 +59,8 @@ const ChatInput = ({chatId}: {chatId: string}) => {
           >
            Upgrade to PRO
           </ToastAction>
-        )
-      })
+        ),
+      });
     }
 
     const userToStore: User = {
