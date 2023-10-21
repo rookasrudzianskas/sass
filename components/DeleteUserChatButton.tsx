@@ -36,13 +36,29 @@ const DeleteUserChatButton = ({chatId}: {chatId: string}) => {
   const router = useRouter();
   const adminId = useAdminId({chatId});
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     toast({
       title: "Deleting Chat",
       description: "Please wait while we delete the chat...",
     });
 
     console.log('Deleting chat', chatId);
+
+    await fetch("/api/chat/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ chatId: chatId }),
+    }).then((res) => {
+      toast({
+        title: "Success",
+        description: "You chat successfully deleted",
+        className: "bg-green-600 text-white",
+        duration: 3000
+      });
+      router.replace('/chat');
+    })
   }
 
   return (
